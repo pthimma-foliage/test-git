@@ -1,0 +1,55 @@
+<PMML version="4.2" xmlns="http://www.dmg.org/PMML-4_2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dmg.org/PMML-4_2 http://www.dmg.org/v4-2/pmml-4-2.xsd">
+ <Header copyright="Copyright (c) 2016 pthimma" description="NaiveBayes Model">
+  <Extension name="user" value="pthimma" extender="Rattle/PMML"/>
+  <Application name="Rattle/PMML" version="1.4"/>
+  <Timestamp>2016-05-26 11:45:18</Timestamp>
+ </Header>
+ <DataDictionary numberOfFields="3">
+  <DataField name="Shape" optype="categorical" dataType="string">
+   <Value value="Rectangle"/>
+   <Value value="Square"/>
+  </DataField>
+  <DataField name="Heigth" optype="continuous" dataType="double"/>
+  <DataField name="Width" optype="continuous" dataType="double"/>
+ </DataDictionary>
+ <NaiveBayesModel modelName="shape-classifier;43" functionName="classification" threshold="0.001">
+  <MiningSchema>
+   <MiningField name="Shape" usageType="predicted"/>
+   <MiningField name="Heigth" usageType="active"/>
+   <MiningField name="Width" usageType="active"/>
+  </MiningSchema>
+  <Output>
+   <OutputField name="Predicted_Shape" feature="predictedValue"/>
+   <OutputField name="Probability_Rectangle" optype="continuous" dataType="double" feature="probability" value="Rectangle"/>
+   <OutputField name="Probability_Square" optype="continuous" dataType="double" feature="probability" value="Square"/>
+  </Output>
+  <BayesInputs>
+   <BayesInput fieldName="Heigth">
+    <TargetValueStats>
+     <TargetValueStat value="Rectangle">
+      <GaussianDistribution mean="15" variance="11"/>
+     </TargetValueStat>
+     <TargetValueStat value="Square">
+      <GaussianDistribution mean="15.3" variance="11.1222222222222"/>
+     </TargetValueStat>
+    </TargetValueStats>
+   </BayesInput>
+   <BayesInput fieldName="Width">
+    <TargetValueStats>
+     <TargetValueStat value="Rectangle">
+      <GaussianDistribution mean="5" variance="11"/>
+     </TargetValueStat>
+     <TargetValueStat value="Square">
+      <GaussianDistribution mean="15.3" variance="11.1222222222222"/>
+     </TargetValueStat>
+    </TargetValueStats>
+   </BayesInput>
+  </BayesInputs>
+  <BayesOutput fieldName="Shape">
+   <TargetValueCounts>
+    <TargetValueCount value="Rectangle" count="11"/>
+    <TargetValueCount value="Square" count="10"/>
+   </TargetValueCounts>
+  </BayesOutput>
+ </NaiveBayesModel>
+</PMML>
